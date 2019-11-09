@@ -14,13 +14,21 @@ def format_message(email_row):
         email_row['plural'] = "s"
     else:
         email_row['plural'] = ""
+    if email_row['no_clicker'] == "1":
+        email_row['no_clicker_text'] = "<p>Our records show that you have not registered an iClicker. If you are using an iClicker, please fill out this form with your clicker ID so that we can give you credit for any lectures you have attended.</p>"
+    else:
+        email_row['no_clicker_text'] = ""
     message = """<p>Hi {first_name},</p>
 
 <p>As of November 5, you have earned {points} participation point{plural} in CSE 105. This point does not yet include the November 6 lecture or the November 6-8 discussion sections.</p>
 
+{no_clicker_text}
+
 <p>It takes 20 points to earn full marks in the participation component of your grade (10%). With fewer than 20 points, we will prorate the 10%.</p>
 
 <p>In the weeks ahead, you can still earn 6 more participation points from iClicker questions in lecture, 5 more points from attending discussion sections, and up to 10 more points from review quizzes.</p>
+
+<p>If you are no longer enrolled in CSE 105, please reply to this email so that we may exclude you from future points annoucements.</p>
 
 <p>-- CSE 105 Instructional Staff</p>
 
@@ -46,7 +54,8 @@ def read_points(filename):
         for row in points_reader:
             points.append({'first_name': row['First Name'],
                            'PID': row['Student ID'].upper(),
-                           'points': row['Total Participation Points']})
+                           'points': row['Total Participation Points'],
+                           'no_clicker': row['no_clicker']})
     return points
 
 if __name__ == '__main__':
@@ -76,7 +85,8 @@ if __name__ == '__main__':
             roster_entry = roster[student['PID']]
             email_row = {'first_name': student['first_name'],
                          'email': roster_entry['email'],
-                         'points': student['points']}
+                         'points': student['points'],
+                         'no_clicker': student['no_clicker']}
             email_text = format_message(email_row)
 
             email_msg = MIMEText(email_text, 'html')

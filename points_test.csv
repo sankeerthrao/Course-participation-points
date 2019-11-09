@@ -1,4 +1,4 @@
-Student ID,Last Name,First Name,Total Participation Points
-A12345678,Rao,Sankeerth,7
-A55555555,Borkowski,Michael,1
-A87654321,Else,Someone,2
+Student ID,Last Name,First Name,Total Participation Points,no_clicker
+A12345678,Rao,Sankeerth,7,1
+A55555555,Borkowski,Michael,1,
+A87654321,Else,Someone,2,
