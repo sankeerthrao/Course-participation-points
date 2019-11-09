@@ -15,7 +15,7 @@ def format_message(email_row):
     else:
         email_row['plural'] = ""
     if email_row['no_clicker'] == "1":
-        email_row['no_clicker_text'] = "<p>Our records show that you have not registered an iClicker. If you are using an iClicker, please fill out this form with your clicker ID so that we can give you credit for any lectures you have attended.</p>"
+        email_row['no_clicker_text'] = "<p>Our records show that you have not registered an iClicker. If you are using an iClicker, please fill out this form with your clicker ID so that we can give you credit for any lectures you have attended: <a href=\"https://docs.google.com/forms/d/12m6cSDuiEizaNAbCK2Dgn0OpUIMLgoucnTmS7pbV1qc\">https://docs.google.com/forms/d/12m6cSDuiEizaNAbCK2Dgn0OpUIMLgoucnTmS7pbV1qc</a></p>"
     else:
         email_row['no_clicker_text'] = ""
     message = """<p>Hi {first_name},</p>
