@@ -20,13 +20,13 @@ def format_message(email_row):
         email_row['no_clicker_text'] = ""
     message = """<p>Hi {first_name},</p>
 
-<p>As of November 5, you have earned {points} participation point{plural} in CSE 105. This point does not yet include the November 6 lecture or the November 6-8 discussion sections.</p>
+<p>As of November 12, you have earned {points} participation point{plural} in CSE 105. This total does not yet include the November 6 lecture.</p>
 
 {no_clicker_text}
 
 <p>It takes 20 points to earn full marks in the participation component of your grade (10%). With fewer than 20 points, we will prorate the 10%.</p>
 
-<p>In the weeks ahead, you can still earn 6 more participation points from iClicker questions in lecture, 5 more points from attending discussion sections, and up to 10 more points from review quizzes.</p>
+<p>In the weeks ahead, you can still earn 5 more participation points from iClicker questions in lecture, 4 more points from attending discussion sections, and up to 8 more points from review quizzes.</p>
 
 <p>If you are no longer enrolled in CSE 105, please reply to this email so that we may exclude you from future points annoucements.</p>
 
@@ -52,6 +52,8 @@ def read_points(filename):
     with open(filename) as points_file:
         points_reader = csv.DictReader(points_file)
         for row in points_reader:
+            if row['dropped'] == "1":
+                continue
             points.append({'first_name': row['First Name'],
                            'PID': row['Student ID'].upper(),
                            'points': row['Total Participation Points'],
@@ -66,8 +68,8 @@ if __name__ == '__main__':
         roster_fn = 'roster_test.csv'
         points_fn = 'points_test.csv'
     else:
-        roster_fn = 'CSE_105_Fall_2019_roster_REMOVEWHENREADY.csv'
-        points_fn = 'participation_points_REMOVEWHENREADY.csv' 
+        roster_fn = 'CSE_105_Fall_2019_roster.csv'
+        points_fn = 'participation_points.csv' 
 
     context = ssl.SSLContext(ssl.PROTOCOL_TLS)
     server = smtplib.SMTP('smtp.ucsd.edu', 587)
